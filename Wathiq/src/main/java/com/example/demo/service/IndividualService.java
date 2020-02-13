@@ -1,9 +1,12 @@
 package com.example.demo.service;
 
+import java.util.NoSuchElementException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.IndividualDTO;
+import com.example.demo.exception.NotFoundException;
 import com.example.demo.mapperImp.IndividualMapperImp;
 import com.example.demo.model.Individual;
 import com.example.demo.repository.IndividualRepository;
@@ -49,6 +52,41 @@ public class IndividualService {
 				.orElseThrow(() -> new Exception("NationalID not found - " + nationalID));
 
 	}
+
+	public void deleteIndividual (String nationalID) {
+		try {
+			Individual individual=individualRepository.findById(nationalID).get();
+			individualRepository.delete(individual);
+		}catch (NoSuchElementException ex) {
+			throw new NotFoundException(String.format("No Record with the nationalID [%s] was found in our database", nationalID));
+		}
+	}
+
+
+
+	public IndividualDTO updateAddressIndividualDTO (String nationalID, String address ) {	
+
+		try {
+			individualRepository.updateAddress(nationalID, address);
+			return individualRepository.findById(nationalID)
+					.map(individualMapper::domainToDto).get();
+		}catch (NoSuchElementException ex) {
+			throw new NotFoundException(String.format("No Record with the nationalID [%s] was found in our database", nationalID));
+		}
+
+	}
+
+
+
+	public IndividualDTO getById(String nationalID) {
+		try {
+			return individualRepository.findById(nationalID)
+					.map(individualMapper::domainToDto).get();
+		}catch (NoSuchElementException ex) {
+			throw new NotFoundException(String.format("No Record with the nationalID [%s] was found in our database", nationalID));
+		}
+	}
+
 
 
 

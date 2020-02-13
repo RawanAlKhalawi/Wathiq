@@ -25,7 +25,7 @@ public class Individual extends WathiqUser implements Serializable {
 	private static final long serialVersionUID = -3009157732242241606L;
 
 	@Id
-	@Column(name = "nationalID")
+	@Column(name = "nationalID", unique=true)
 	private String nationalID;
 
 	@NotNull

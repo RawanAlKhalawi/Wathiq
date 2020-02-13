@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.sql.Timestamp;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,11 +17,11 @@ public class CertificateController {
 
 	@Autowired
 	CertificateService certificateService;
-	Individual individual=new Individual("1");
-	EduInstitution eduInstitution =new EduInstitution("1","1","1");
-	CertificateDTO certificateDTO=new CertificateDTO("1",individual, eduInstitution,
-			eduInstitution, eduInstitution, "1", null, 0.0,
-			"1", "1");
+	Individual individual=new Individual("1095653645");
+	EduInstitution eduInstitution =new EduInstitution("11","11","11");
+	CertificateDTO certificateDTO=new CertificateDTO("11",individual, eduInstitution,
+			eduInstitution, eduInstitution, "11", Timestamp.valueOf("2070-11-12 01:02:03.123456789"), 0.0,
+			"11", "11");
 
 	@RequestMapping("/insertCertificate")
 	public String process(){

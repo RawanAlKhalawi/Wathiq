@@ -19,7 +19,7 @@ public class CertificateService {
 
 	public CertificateDTO createCertificateDTO(CertificateDTO certificateDTO) {
 
-
+		
 
 		Certificate certificate=Certificate.builder()
 				.certificateID(certificateDTO.getCertificateID())
@@ -36,7 +36,7 @@ public class CertificateService {
 
 
 
-		Certificate saveCertificate  = certificateRepository.save(certificate);
+		Certificate saveCertificate  = certificateRepository.saveAndFlush(certificate);
 		return certificateMapper.domainToDto(saveCertificate);
 
 

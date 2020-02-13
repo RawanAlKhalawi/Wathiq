@@ -29,7 +29,7 @@ public class Certificate implements Serializable {
 
 
 	@Id
-	@Column(name = "certificateID", unique= true)
+	@Column(name = "certificateID")
 	private String certificateID;
 
 
